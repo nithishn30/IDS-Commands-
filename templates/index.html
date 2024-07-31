@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Server</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Command Server</h1>
+    <!-- <form method="POST" action="/">
+        <input type="text" name="command" placeholder="Enter command">
+        <button type="submit">Send</button>
+    </form> -->
+    <div class="analysis-files">
+        <h2>Analysis files</h2>
+        <div class="files">
+            {% if client_files %}
+                {% for file in client_files %}
+                    <a href="/analyse_file/{{ file }}">{{ file }}</a>
+                    <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="interfaces">
+        <h2>Monitor interfaces</h2>
+        <div class="files">
+            {% if interfaces %}
+                {% for interface in interfaces %}
+                    <a href="/analyse_interface/{{ interface }}">{{ interface }}</a>
+                    <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Fetch the list of files and populate the dropdown
+            $.get('/captures', function(data) {
+                var fileSelect = $('#fileSelect');
+                data.forEach(function(file) {
+                    fileSelect.append(new Option(file, file));
+                });
+            });
+        }) 
+    </script>
+</body>
+</html>
